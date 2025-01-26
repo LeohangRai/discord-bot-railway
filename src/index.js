@@ -20,6 +20,7 @@ const client = new Client({
     GatewayIntentBits.MessageContent,
   ],
 });
+import http from 'http';
 
 // Load all the commands
 const commands = [];
@@ -172,3 +173,11 @@ client.on(Events.GuildMemberRemove, async (member) => {
 });
 
 client.login(process.env.TOKEN);
+
+const PORT = process.env.PORT || 4000;
+http
+  .createServer((req, res) => {
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.end("Discord bot is running!\n");
+  })
+  .listen(PORT, () => console.log(`Listening on port ${PORT}`));
