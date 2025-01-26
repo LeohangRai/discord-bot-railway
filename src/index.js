@@ -184,6 +184,7 @@ process.on("unhandledRejection", (reason, promise) => {
 });
 
 const PORT = process.env.PORT || 4000;
+console.log('process.version', process.version)
 http
   .createServer((req, res) => {
     res.writeHead(200, { "Content-Type": "text/plain" });
