@@ -8,7 +8,9 @@ import {
   REST,
   Routes,
 } from "discord.js";
+import 'dotenv/config';
 import fs from "fs";
+import http from 'http';
 import path from "path";
 import { fileURLToPath } from "url";
 const client = new Client({
@@ -20,7 +22,6 @@ const client = new Client({
     GatewayIntentBits.MessageContent,
   ],
 });
-import http from 'http';
 
 // Load all the commands
 const commands = [];
@@ -173,6 +174,14 @@ client.on(Events.GuildMemberRemove, async (member) => {
 });
 
 client.login(process.env.TOKEN);
+
+process.on("uncaughtException", (err) => {
+  console.error("Uncaught Exception:", err);
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("Unhandled Rejection:", reason);
+});
 
 const PORT = process.env.PORT || 4000;
 http
